@@ -1,0 +1,16 @@
+{
+  "products": [
+    {
+      "name": "Sage Green Tank Top",
+      "price": 110000,
+      "imageUrl": "https://d29c1z66frfv6c.cloudfront.net/pub/media/catalog/product/zoom/9494f9a3b7cbccb039e3800d698f8d153e2f05aa_xxl-1.jpg",
+      "stock": 3
+    },
+    {
+      "name": "Dark Blue Oversize T-Shirt",
+      "price": 135000,
+      "imageUrl": "https://d29c1z66frfv6c.cloudfront.net/pub/media/catalog/product/zoom/fdab7c354797bac6536436f6a399f028e20717b4_xxl-1.jpg",
+      "stock": 0
+    }
+  ]
+}
