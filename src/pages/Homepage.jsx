@@ -1,24 +1,29 @@
 import { ProductCard } from "../components/uis/card/ProductCard";
-
-const productsRaw = [
-  {
-    name: "Sage Green Tank Top",
-    price: 110000,
-    imageUrl:
-      "https://d29c1z66frfv6c.cloudfront.net/pub/media/catalog/product/zoom/9494f9a3b7cbccb039e3800d698f8d153e2f05aa_xxl-1.jpg",
-    stock: 3,
-  },
-  {
-    name: "Dark Blue Oversize T-Shirt",
-    price: 135000,
-    imageUrl:
-      "https://d29c1z66frfv6c.cloudfront.net/pub/media/catalog/product/zoom/fdab7c354797bac6536436f6a399f028e20717b4_xxl-1.jpg",
-    stock: 0,
-  },
-];
+import { useEffect, useState } from "react";
+import { axiosInstance } from "@/lib/axios";
 
 const HomePage = () => {
-  const product = productsRaw.map((value, index) => {
+  const [isLoading, setIsloading] = useState(false);
+  const [productData, setProductData] = useState([]);
+
+  const fetchProducts = async () => {
+    setIsloading(true);
+    try {
+      const fetchData = await axiosInstance.get("/products");
+      // console.log(fetchData.data);
+      setProductData(fetchData.data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsloading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const product = productData.map((value, index) => {
     return (
       <div key={index} className="">
         <ProductCard
@@ -44,8 +49,11 @@ const HomePage = () => {
               throughout your days.
             </p>
           </div>
-
-          <div className="grid grid-cols-2 gap-4">{product}</div>
+          {isLoading ? (
+            <p>Sedang Dimuat...</p>
+          ) : (
+            <div className="grid grid-cols-2 gap-4">{product}</div>
+          )}
         </main>
         {/* <Footer /> */}
       </div>
